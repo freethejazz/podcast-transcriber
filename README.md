@@ -108,6 +108,36 @@ Example response:
 }
 ```
 
+#### Example logs from bootup through a full transcription run
+```
+╰─$ ./transcriber
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /health                   --> main.setupRouter.func1 (3 handlers)
+[GIN-debug] POST   /job                      --> main.setupRouter.func2 (3 handlers)
+[GIN-debug] POST   /search                   --> main.setupRouter.func3 (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2023/05/25 - 16:08:22 | 200 |     598.727µs |             ::1 | POST     "/job"
+2023/05/25 16:08:22 Downloading https://dts.podtrac.com/redirect.mp3/feeds.soundcloud.com/stream/1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3
+2023/05/25 16:08:26 1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3
+2023/05/25 16:08:26 Downloaded https://dts.podtrac.com/redirect.mp3/feeds.soundcloud.com/stream/1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3 to dls/7e1a5a7a-e164-4258-8d1f-bf7bcfa65880
+2023/05/25 16:08:26 Transcribing 1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3
+2023/05/25 16:08:59 Finished transcribing 1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3
+2023/05/25 16:08:59 Parsing raw SRT captions for 1181362132-ideo_u-well-said-strategy-is-a-set-of-choices.mp3
+2023/05/25 16:08:59 Raw captions are parsed
+2023/05/25 16:08:59 Processing captions to include context
+2023/05/25 16:08:59 Processed captions
+2023/05/25 16:08:59 Indexing processed captions to elasticsearch
+2023/05/25 16:09:00 Captions indexed successfully.
+2023/05/25 16:09:00 Indexed captions
+```
+
 ### What is an SRT file?
 A structured text file that represents subtitles and the timestamps they
 are associated with. As an example:
